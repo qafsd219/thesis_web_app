@@ -34,7 +34,7 @@ async function pairCode() {
       linkedAt: Date.now()
     });
 
-    console.log("Code linked!");
+    alert("Code linked!");
     await logEvent("Pair Successful", `Code ${code} successfully paired.`);
 
     if (document.activeElement) {
