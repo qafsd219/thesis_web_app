@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bin</title>
+    <!-- Bootstrap CSS and JS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Scripts -->
+    <script type="module" src="js/user-menu-bar.js" defer></script>
+    <script type="module" src="js/fetch-user-data.js" defer></script>
+    <script type="module" src="js/leaderboard.js" defer></script>
+    <script type="module" src="js/pair.js" defer></script>
+    <script type="module" src="js/redeem-points.js" defer></script>
+    <script type="module" src="js/logout.js" defer></script>
+    <script type="module" src="js/edit-user-data.js" defer></script>
+    <script type="module" src="js/session-manager.js"></script>
+</head>
+
+<body tabindex="0" class="d-flex flex-column min-vh-100">
+    <!-- LPU BANNER - DESKTOP -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-2 px-4 d-none d-md-block" style="background-color: #8c0001;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="user.html">
+                <img src="src/LPU_banner-desktop.png" alt="LPU-C" class="desktop-image" style="max-height: 97px;">
+            </a>
+        </div>
+    </nav>
+
+    <!-- LPU BANNER - MOBILE -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-2 px-4 d-block d-md-none" style="background-color: #8c0001;">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="user.html">
+                <img src="src/LPU_banner-mobile.png" alt="LPU-C" class="mobile-image" style="max-height: 93px;">
+            </a>
+        </div>
+    </nav>
+
+    <!-- MENU BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-2 px-4" style="background-color: #dde0e4;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="dashboard"><i class="fas fa-home"></i>
+                            Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="userProfile"><i class="fas fa-user"></i>
+                            Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="leaderboard"><i class="fas fa-trophy"></i>
+                            Leaderboard</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <button id="logoutBtn" class="btn btn-outline-dark">
+                    <i class="fas fa-sign-out-alt"></i><span class="d-none d-md-inline"> Log-out</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container-fluid mt-4">
+        <!-- Dashboard -->
+        <section id="dashboard" class="d-flex justify-content-center">
+            <div class="row g-3 justify-content-center mx-auto p-4 bg-light rounded shadow" style="max-width: 1100px;">
+                <!-- PLAYY -->
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Play</div>
+                        <div class="stat-number">
+                            <a href="#" class="text-danger fs-1" data-bs-toggle="modal" data-bs-target="#pairingModal"
+                                title="Play Button">
+                                <i class="fas fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Pairing Modal -->
+                    <div class="modal fade" id="pairingModal" tabindex="-1" aria-labelledby="pairingModalLabel">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="pairingModalLabel">Enter Pairing Code</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body d-flex justify-content-center align-items-center">
+                                    <input type="text" id="pairCode" class="form-control"
+                                        placeholder="Enter pairing code"
+                                        style="max-width: 500px; width: 100%; box-sizing: border-box;">
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-success" id="submitPairCodeBtn">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- REDEEM -->
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Redeem Points</div>
+                        <div class="stat-number">
+                            <a href="#" class="text-danger fs-1" data-bs-toggle="modal"
+                                data-bs-target="#redeemPointsModal" title="Redeem Points">
+                                <i class="fas fa-gift"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Redeem Points Modal -->
+                    <div class="modal fade" id="redeemPointsModal" tabindex="-1" aria-labelledby="redeemPointsLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="redeemPointsLabel">Redeem Your Points</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="redeemForm">
+                                        <div class="mb-3">
+                                            <label for="pointsToRedeem" class="form-label">
+                                                How many points would you like to use?
+                                            </label>
+                                            <input type="number" id="pointsToRedeem" class="form-control" name="points"
+                                                min="1" step="1" required>
+                                            <div class="form-text">
+                                                You may redeem up to <span id="maxPointsText">0</span> points.
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="confirmRedeemBtn">
+                                        Redeem
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Current Points</div>
+                        <div class="stat-number"><span id="currentPoints"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Bottles Recycled</div>
+                        <div class="stat-number"><span id="totalPoints"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Sessions Played</div>
+                        <div class="stat-number"><span id="completedSessions">0</span></div>
+                    </div>
+                </div>    
+            </div>
+        </section>
+
+        <!-- User Profile -->
+        <section id="userProfile" class="d-none justify-content-center">
+            <div class="profile-container mx-auto p-4 bg-light rounded shadow" style="max-width: 500px;">
+                <div class="profile-avatar text-center mb-4">
+                    <img id="profile-avatar" src="src/pirateavatar.png" alt="User Avatar"
+                        class="img-fluid rounded-circle" style="max-width: 200px;">
+                </div>
+                <div class="profile-details py-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Name:</label>
+                        <input type="text" id="userName" class="form-control form-control-lg" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Email:</label>
+                        <input type="email" id="userEmail" class="form-control form-control-lg" readonly>
+                    </div>
+                    <div class="mb-3 d-none" id="passwordSection">
+                        <label class="form-label fw-bold">New Password:</label>
+                        <input type="password" id="userPassword" class="form-control form-control-lg mb-2"
+                            placeholder="Enter new password">
+                        <input type="password" id="confirmNewPassword" class="form-control form-control-lg"
+                            placeholder="Confirm new password">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button id="editProfileBtn" class="btn btn-primary">Edit Profile</button>
+                        <div class="d-flex gap-2">
+                            <button id="changePasswordBtn" class="btn btn-warning d-none">Change Password</button>
+                            <button id="saveBtn" class="btn btn-success d-none">Save</button>
+                            <button id="cancelBtn" class="btn btn-secondary d-none">Cancel</button>
+                        </div>
+                    </div>
+                    <!-- Reauthentication Modal -->
+                    <div class="modal" tabindex="-1" id="reauthModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Reauthentication Required</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="currentPasswordInput" class="form-label">Enter your current
+                                        password:</label>
+                                    <input type="password" id="currentPasswordInput" class="form-control"
+                                        placeholder="Current password">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" id="confirmReauthBtn">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard -->
+        <section id="leaderboard" class="container-fluid d-none justify-content-center">
+            <div class="w-100 max-width-750 mx-auto p-4 bg-light rounded shadow">
+                <div class="text-center mb-4">
+                    <h1 class="fw-bold">Gamified Segregation Top Contributors</h1>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Total Points</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

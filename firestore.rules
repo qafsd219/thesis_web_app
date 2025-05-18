@@ -1,0 +1,46 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    // USERS collection
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ADMIN collection
+    match /admin/{docId} {
+      allow read, write: if isAdmin();
+
+      // Explicit rule for metrics document
+      match /metrics {
+        allow read: if isAdmin();
+        allow write, update: if request.auth != null;
+      }
+
+      // Any nested subcollections under admin documents
+      match /{subcollection=**} {
+        allow read: if isAdmin();
+        allow write, update: if request.auth != null;
+      }
+    }
+
+    // LOGS collection
+    match /logs/{logId} {
+      allow read: if isAdmin(); // only admins can read
+      allow write: if request.auth != null; // any signed-in user can write
+    }
+
+    // PUBLIC METRICS
+    match /public/metrics {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

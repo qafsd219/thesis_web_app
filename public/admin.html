@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bin</title>
+    <!-- Bootstrap CSS and JS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Scripts -->
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/admin-menu-bar.js" defer></script>
+    <script type="module" src="js/admin-settings.js" defer></script>
+    <script type="module" src="js/user-management.js" defer></script>
+    <script type="module" src="js/leaderboard.js" defer></script>
+    <script type="module" src="js/system-logs.js" defer></script>
+    <script type="module" src="js/logout.js" defer></script>
+    <script type="module" src="js/session-manager.js"></script>
+</head>
+
+<body>
+    <!-- LPU BANNER - DESKTOP -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-2 px-4 d-none d-md-block" style="background-color: #8c0001;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="src/LPU_banner-desktop.png" alt="LPU-C" class="desktop-image" style="max-height: 97px;">
+            </a>
+        </div>
+    </nav>
+    <!-- LPU BANNER - MOBILE -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-2 px-4 d-block d-md-none" style="background-color: #8c0001;">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="index.html">
+                <img src="src/LPU_banner-mobile.png" alt="LPU-C" class="mobile-image" style="max-height: 93px;">
+            </a>
+        </div>
+    </nav>
+    <!-- MENU BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-2 px-4" style="background-color: #dde0e4;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="dashboard"><i class="fas fa-home"></i>
+                            Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="userManagement"><i
+                                class="fas fa-address-book"></i>
+                            User Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="leaderboard"><i class="fas fa-trophy"></i>
+                            Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="systemLogs"><i class="fas fa-clipboard"></i>
+                            System Logs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#" data-target="adminSettings"><i class="fas fa-gear"></i>
+                            Admin Settings</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <button id="logoutBtn" class="btn btn-outline-dark">
+                    <i class="fas fa-sign-out-alt"></i><span class="d-none d-md-inline"> Log-out</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container-fluid mt-4">
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="d-flex justify-content-center">
+            <div class="row g-3 justify-content-center mx-auto p-4 bg-light rounded shadow" style="max-width: 1100px;">
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Total Bottles Collected</div>
+                        <div class="stat-number"><span id="totalBottles"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Bottles Collected Today</div>
+                        <div class="stat-number"><span id="todayBottles"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Bottles Collected Yesterday</div>
+                        <div class="stat-number"><span id="yesterdayBottles"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Bottles Collected Last Week</div>
+                        <div class="stat-number"><span id="weeklyBottles"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Registered Users</div>
+                        <div class="stat-number"><span id="totalUsers"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Completed Sessions</div>
+                        <div class="stat-number"><span id="completedSessions"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Bottles Bin Level</div>
+                        <div class="stat-number"><span id="bottleBinLevel"></span></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="stat-box text-center p-3">
+                        <div class="stat-label">Others Bin Level</div>
+                        <div class="stat-number"><span id="otherBinLevel"></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- USER MANAGEMENT -->
+        <section id="userManagement" class="container-fluid d-none justify-content-center">
+            <div class="w-100 max-width-750 mx-auto p-4 bg-light rounded shadow">
+                <div class="text-center mb-4">
+                    <h1 class="fw-bold">User Management</h1>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered align-middle">
+                        <thead class="table-danger text-white text-center">
+                            <tr>
+                                <th class="text-center">User ID</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Role</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body">
+                            <!-- DYNAMICALLY POPULATED -->
+                        </tbody>
+                    </table>
+                    <!-- Edit User Modal -->
+                    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form id="editUserForm">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" id="editUserId">
+                                        <div class="mb-3">
+                                            <label for="editUserName" class="form-label">Name</label>
+                                            <input type="text" class="form-control" id="editUserName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="editUserEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="editUserEmail" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="editUserRole" class="form-label">Role</label>
+                                            <select class="form-select" id="editUserRole" required>
+                                                <option value="user">User</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- LEADERBOARD -->
+        <section id="leaderboard" class="container-fluid d-none justify-content-center">
+            <div class="w-100 max-width-750 mx-auto p-4 bg-light rounded shadow">
+                <div class="text-center mb-4">
+                    <h1 class="fw-bold">Gamified Segregation Top Contributors</h1>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped align-middle">
+                        <thead class="table-danger text-white text-center">
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Total Points</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- SYSTEM LOGS -->
+        <section id="systemLogs" class="container-fluid d-none justify-content-center">
+            <div class="w-100 max-width-750 mx-auto p-4 bg-light rounded shadow">
+                <div class="text-center mb-4">
+                    <h1 class="fw-bold">System Logs</h1>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped align-middle">
+                        <thead class="table-danger text-white text-center">
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logs-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                    <div class="pagination-controls">
+                        <button id="prevBtn" disabled>Previous</button>
+                        <button id="nextBtn" disabled>Next</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ADMIN SETTINGS -->
+        <section id="adminSettings" class="container-fluid d-none justify-content-center">
+            <div class="w-100 max-width-750 mx-auto p-4 bg-light rounded shadow">
+                <div class="text-center mb-4">
+                    <h1 class="fw-bold">Admin Settings</h1>
+                </div>
+                <button id="addEmployee" class="btn btn-danger mb-4">Add Employee</button>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped align-middle">
+                        <thead class="table-danger text-white text-center">
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Email</th>
+                                <th>Mobile No</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-settings-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- ADD/EDIT EMPLOYEE MODAL -->
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <form id="employeeForm" class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addEmployeeModalLabel">Add New Employee</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="employeeName" class="form-label">Employee Name</label>
+                                <input type="text" class="form-control" id="employeeName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="employeeEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="employeeEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="employeeMobile" class="form-label">Mobile No</label>
+                                <input type="text" class="form-control" id="employeeMobile" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="employeeStatus" class="form-label">Status</label>
+                                <select class="form-select" id="employeeStatus" required>
+                                    <option value="" disabled selected>Select status</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
