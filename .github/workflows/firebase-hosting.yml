@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: '18'
 
-    - run: npm ci
+    - run: npm install
 
     - run: npm run build # Only if you're using a build step (like React/Vue)
     
