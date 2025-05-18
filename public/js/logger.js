@@ -1,4 +1,4 @@
-import { db, auth, collection, addDoc, serverTimestamp, doc } from "./firebase-config.js";
+import { db, auth, collection, addDoc, serverTimestamp, getDoc, doc } from "./firebase-config.js";
 
 export async function logEvent(event, details) {
   const user = auth.currentUser;
